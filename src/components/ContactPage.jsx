@@ -17,7 +17,7 @@ const ContactPage = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    // Only allow digits for phone and limit to 10 chars
+    
     if (name === 'phone') {
       const digits = value.replace(/\D/g, '').slice(0, 10);
       setFormData(prev => ({ ...prev, phone: digits }));
@@ -30,17 +30,15 @@ const ContactPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Validate phone is exactly 10 digits
     if (!formData.phone || formData.phone.length !== 10) {
       toast.error('⚠️ Please enter a valid 10-digit phone number.');
       console.warn('Submit blocked - invalid phone:', formData.phone);
       return;
     }
 
-    // Format the message for WhatsApp
+ 
     const whatsappMessage = `Name: ${encodeURIComponent(formData.name)}%0AEmail: ${encodeURIComponent(formData.email)}%0APhone: ${encodeURIComponent(formData.phone)}%0ASubject: ${encodeURIComponent(formData.subject)}%0AMessage: ${encodeURIComponent(formData.message)}`;
 
-    // Open WhatsApp with pre-filled message
     window.open(`https://wa.me/8792390642?text=${whatsappMessage}`, '_blank');
   };
 
@@ -59,12 +57,11 @@ const ContactPage = () => {
         theme="dark"
       />
       
-      {/* Background decorative elements */}
+
       <div className={contactStyles.bgGradient}></div>
       <div className={contactStyles.bgBlob1}></div>
       <div className={contactStyles.bgBlob2}></div>
       
-      {/* Film strip effect */}
       <div className={contactStyles.filmStripTop}>
         {[...Array(20)].map((_, i) => (
           <div key={i} className={contactStyles.filmStripSegment}></div>
@@ -77,7 +74,7 @@ const ContactPage = () => {
       </div>
 
       <div className={contactStyles.contentContainer}>
-        {/* Animated Heading */}
+     
         <div className={contactStyles.headerContainer}>
           <div className="inline-flex items-center justify-center mb-4">
             <h1 className={contactStyles.headerTitle}>
@@ -91,7 +88,7 @@ const ContactPage = () => {
         </div>
 
         <div className={contactStyles.gridContainer}>
-          {/* Contact Form Card - Creative Shape */}
+         
           <div className={contactStyles.cardRelative}>
             <div className={contactStyles.cardGradient}></div>
             <div className={contactStyles.cardContainer}>
@@ -209,10 +206,9 @@ const ContactPage = () => {
               </form>
             </div>
           </div>
-          
-          {/* Contact Information & Additional Cards */}
+        
           <div className="space-y-6">
-            {/* Contact Information Card */}
+         
             <div className={contactStyles.cardRelative}>
               <div className={contactStyles.cardGradient}></div>
               <div className={contactStyles.cardContainer}>
@@ -259,7 +255,7 @@ const ContactPage = () => {
               </div>
             </div>
             
-            {/* Emergency Support Card */}
+     
             <div className={contactStyles.cardRelative}>
               <div className={contactStyles.emergencyCardGradient}></div>
               <div className={contactStyles.emergencyCard}>

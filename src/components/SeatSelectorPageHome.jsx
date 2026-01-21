@@ -1,4 +1,4 @@
-// src/components/SeatSelectorPage/SeatSelectorPage.jsx
+
 import React, { useEffect, useState, useMemo } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { ArrowLeft, Sofa, RockingChair, Ticket, CreditCard, Film } from "lucide-react";
@@ -24,7 +24,6 @@ export default function SeatSelectorPage() {
 
   const movie = useMemo(() => movies.find((m) => m.id === movieId), [movieId]);
 
-  // Find slot object (supports both string array and object array with {time, audi})
   const slotObj = useMemo(() => {
     if (!movie || !slotKey) return null;
     if (!Array.isArray(movie.slots)) return null;
@@ -183,7 +182,7 @@ export default function SeatSelectorPage() {
     <div className={seatSelectorHStyles.pageContainer}>
       <style>{seatSelectorHStyles.customCSS}</style>
       <div className={seatSelectorHStyles.mainContainer}>
-        {/* Header */}
+      
         <div
           className={seatSelectorHStyles.headerContainer}
           style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }}
@@ -220,7 +219,7 @@ export default function SeatSelectorPage() {
             </div>
           </div>
 
-          {/* Audi badge on the top-right */}
+       
           <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-end", minWidth: 120 }}>
             <div
               className={seatSelectorHStyles.audiBadge}
@@ -242,7 +241,7 @@ export default function SeatSelectorPage() {
           </div>
         </div>
 
-        {/* Screen */}
+   
         <div className={seatSelectorHStyles.screenContainer}>
           <div
             className={seatSelectorHStyles.screen}
@@ -257,7 +256,7 @@ export default function SeatSelectorPage() {
           </div>
         </div>
 
-        {/* Main Content */}
+    
         <div className={seatSelectorHStyles.mainContent}>
           <div className={seatSelectorHStyles.sectionHeader}>
             <div className={seatSelectorHStyles.sectionTitleContainer}>
@@ -275,7 +274,7 @@ export default function SeatSelectorPage() {
             </div>
           </div>
 
-          {/* Seat grid */}
+      
           <div className={seatSelectorHStyles.seatGridContainer}>
             {ROWS.map((row) => (
               <div key={row.id} className={seatSelectorHStyles.rowContainer}>
@@ -337,7 +336,7 @@ export default function SeatSelectorPage() {
             ))}
           </div>
 
-          {/* Booking Summary & Actions */}
+       
           <div className={seatSelectorHStyles.summaryGrid}>
             <div className={seatSelectorHStyles.summaryContainer}>
               <h3 className={seatSelectorHStyles.summaryTitle}>

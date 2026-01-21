@@ -7,7 +7,7 @@ import { bannerStyles } from "../assets/dummyStyles";
 const Banner = () => {
   return (
     <div className={bannerStyles.container}>
-      {/* Video background (covers all sizes) */}
+   
       <div className={bannerStyles.videoContainer}>
         <video
           autoPlay
@@ -17,21 +17,20 @@ const Banner = () => {
           className={bannerStyles.video}
         >
           <source src={Video} type="video/mp4" />
-          {/* fallback text */}
+    
           Your browser does not support the video tag.
         </video>
 
-        {/* subtle overlay to keep text legible on smaller screens */}
         <div
           aria-hidden="true"
           className={bannerStyles.overlay}
         />
       </div>
 
-      {/* Content */}
+
       <div className={bannerStyles.content}>
         <div className={bannerStyles.contentInner}>
-          {/* Title with dancing font */}
+   
           <h1
             className={bannerStyles.title}
             style={{ fontFamily: "'Dancing Script', cursive" }}
@@ -39,13 +38,13 @@ const Banner = () => {
             Ocean's Legacy
           </h1>
 
-          {/* Description */}
+
           <p className={bannerStyles.description}>
             An epic adventure beneath the waves. Explore the mysteries of the deep ocean and discover treasures
             beyond imagination in this breathtaking cinematic experience.
           </p>
 
-          {/* Rating and genre */}
+        
           <div className={bannerStyles.ratingGenreContainer}>
             <div className={bannerStyles.ratingContainer}>
               <div className={bannerStyles.starsContainer}>
@@ -63,7 +62,7 @@ const Banner = () => {
             <div className={bannerStyles.genreText}>Adventure • Fantasy • Drama</div>
           </div>
 
-          {/* Action buttons */}
+     
           <div className={bannerStyles.buttonsContainer}>
             <a
               href="/movies"
@@ -84,7 +83,7 @@ const Banner = () => {
         </div>
       </div>
 
-      {/* Custom fonts & small style tweaks */}
+   
       <style>
         {bannerStyles.customCSS}
       </style>
