@@ -1,55 +1,99 @@
-import logo from './logo.svg';
-import './App.css';
+// src/App.jsx
+import React, { useEffect } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
+import "./index.css"
 
-function App() {
-  const [user, setUser] = useState(null);
-  const [hasAccount, setHasAccount] = useState(false);
-  const [cart, setCart] = useState([]);
+import Home from "./pages/Home";
+import Movie from "./pages/Movie";
+import Release from "./pages/Release";
+import Contact from "./pages/Contact";
+import SignUp from "./pages/SignUp";
+import Login from "./pages/Login";
+import MovieDetailPage from "./pages/MovieDetailPage";
+import SeatSelectorPage from "./components/SeatSelectorPage";
+import MovieDetailPageHome from "./pages/MovieDetailPageHome";
+import SeatSelectorPageHome from "./components/SeatSelectorPageHome";
+import Booking from './pages/Booking';
+
+function ScrollToTop() {
+  const location = useLocation();
 
   useEffect(() => {
-    const savedUser = localStorage.getItem('user');
-    if (savedUser) setUser(JSON.parse(savedUser));
-    setHasAccount(!!localStorage.getItem('registeredUser'));
+    if (typeof window !== "undefined" && "scrollRestoration" in window.history) {
+      try {
+        window.history.scrollRestoration = "manual";
+      } catch (e) {
+        // ignore
+      }
+    }
   }, []);
 
-  const handleRegister = (username, password) => {
-    localStorage.setItem('registeredUser', JSON.stringify({ username, password }));
-    setHasAccount(true);
-  };
-
-  const handleLogin = (username, password) => {
-    const registered = JSON.parse(localStorage.getItem('registeredUser'));
-    if (registered && registered.username === username && registered.password === password) {
-      setUser({ username });
-      localStorage.setItem('user', JSON.stringify({ username }));
-      return true;
+  useEffect(() => {
+    // If there's a hash (e.g. /page#section), try to jump to that element
+    if (location.hash) {
+      const id = location.hash.replace("#", "");
+      const el = document.getElementById(id) || document.querySelector(location.hash);
+      if (el) {
+        el.scrollIntoView({ behavior: "auto", block: "start", inline: "nearest" });
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+        return;
+      }
     }
-    return false;
-  };
 
-  const handleLogout = () => {
-    setUser(null);
-    localStorage.removeItem('user');
-  };
+    // Force immediate top-of-page
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  }, [location.pathname, location.search, location.hash]);
+
+  return null;
+}
+
+const App = () => {
+  // Ensure no horizontal overflow on the root document (defensive)
+  useEffect(() => {
+    const prevHtmlOverflowX = document.documentElement.style.overflowX;
+    const prevBodyOverflowX = document.body.style.overflowX;
+
+    document.documentElement.style.overflowX = "hidden";
+    document.body.style.overflowX = "hidden";
+
+    return () => {
+      // restore previous values just in case other scripts rely on them
+      document.documentElement.style.overflowX = prevHtmlOverflowX;
+      document.body.style.overflowX = prevBodyOverflowX;
+    };
+  }, []);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <ScrollToTop />
+
+      {/* Root wrapper prevents horizontal scroll from any child */}
+      <div className="min-h-screen w-full overflow-x-hidden">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/movies" element={<Movie />} />
+          <Route path="/releases" element={<Release />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/bookings" element={<Booking />} />
+
+          <Route path="/movie/:id" element={<MovieDetailPageHome />} />
+
+          <Route path="/movie/:id/seat/:slot" element={<SeatSelectorPageHome />} />
+          <Route path="/movie/:id/seat-selector/:slot" element={<SeatSelectorPageHome />} />
+
+          <Route path="/movies/:id" element={<MovieDetailPage />} />
+
+          <Route path="/movies/:id/seat/:slot" element={<SeatSelectorPage />} />
+          <Route path="/movies/:id/seat-selector/:slot" element={<SeatSelectorPage />} />
+        </Routes>
+      </div>
+    </>
   );
-}
+};
 
 export default App;
