@@ -13,12 +13,12 @@ const formatDuration = (mins) => {
 const fmtTime = (d) =>
   d.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" });
 
-// pricing config
+
 const RECLINER_EXTRA = 200;
-const SERVICE_FEE_RATE = 0.05; // 5%
+const SERVICE_FEE_RATE = 0.05; 
 const SERVICE_FEE_MIN = 10;
 
-// sample bookings array (3 cards)
+
 const sampleBookings = [
   {
     id: "b1",
@@ -27,7 +27,7 @@ const sampleBookings = [
       "https://upload.wikimedia.org/wikipedia/en/d/df/Fighter_film_teaser.jpg",
     category: "Action",
     durationMins: 140,
-    slotTime: new Date(new Date().setHours(19, 30, 0, 0)), // 7:30 PM today
+    slotTime: new Date(new Date().setHours(19, 30, 0, 0)), 
     auditorium: "Audi 3",
     basePrice: 250,
     seats: [
@@ -66,18 +66,18 @@ const sampleBookings = [
 ];
 
 export default function BookingsPage() {
-  // qrs: { bookingId: { url: dataUrl, payload: string } }
+ 
   const [qrs, setQrs] = useState({});
-  const [expanded, setExpanded] = useState({}); // { bookingId: true/false }
-  const [scannedDetails, setScannedDetails] = useState(null); // object or null
+  const [expanded, setExpanded] = useState({}); 
+  const [scannedDetails, setScannedDetails] = useState(null); 
 
-  // generate QR codes for each booking (scannable)
+  
   useEffect(() => {
     let mounted = true;
     const makeAll = async () => {
       const map = {};
       for (const b of sampleBookings) {
-        // payload that we encode inside the QR
+
         const payload = JSON.stringify({
           id: b.id,
           title: b.title,
@@ -92,7 +92,7 @@ export default function BookingsPage() {
             scale: 6,
             color: { dark: "#000000", light: "#ffffff" },
           });
-          // store both the data url (image) and the original payload string
+        
           map[b.id] = { url, payload };
         } catch (e) {
           console.error("QR error", e);
@@ -120,24 +120,23 @@ export default function BookingsPage() {
     setExpanded((prev) => ({ ...prev, [id]: !prev[id] }));
   };
 
-  // Handler when QR is "scanned" (we simulate scan by clicking the QR image)
+
   const handleQrScan = (bookingId) => {
-    // find payload from qrs state
+  
     const entry = qrs[bookingId];
     if (!entry || !entry.payload) {
-      // fallback: nothing to show
+
       return;
     }
     try {
       const parsed = JSON.parse(entry.payload);
-      // Expand the card for the booking
+
       setExpanded((prev) => ({ ...prev, [bookingId]: true }));
-      // Scroll the card into view for better UX
+     
       const el = document.getElementById(`booking-card-${bookingId}`);
       if (el && el.scrollIntoView) {
         el.scrollIntoView({ behavior: "smooth", block: "center" });
       }
-      // Set scanned details to open the modal (this shows the full booking details)
       setScannedDetails({ bookingId, ...parsed });
     } catch (e) {
       console.error("Failed to parse QR payload", e);
@@ -157,7 +156,6 @@ export default function BookingsPage() {
           <div className="text-sm text-gray-400">Present QR at entry</div>
         </header>
 
-        {/* grid: 1 col mobile, 2 cols md, 3 cols lg+ (desktop & xl keep 3 columns) */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {sampleBookings.map((b) => {
             const totals = computeTotals(b);
@@ -187,13 +185,12 @@ export default function BookingsPage() {
                           <span>{b.title}</span>
                         </h2>
 
-                        {/* VISIBLE: Booking ID (small) */}
                         <div className="text-xs text-gray-400 mt-1">
                           Booking ID: <span className="font-mono text-xs text-gray-200">{b.id}</span>
                         </div>
                       </div>
 
-                      {/* compact info on right side on lg+, on small screens appears under title */}
+                      
                       <div className="text-xs text-gray-400 text-right">
                         <div className="hidden lg:block">{b.category}</div>
                       </div>
@@ -216,20 +213,17 @@ export default function BookingsPage() {
                   </div>
                 </div>
 
-                {/* compact row: show seats count + price summary (always visible) */}
                 <div className="mt-4 flex items-center justify-between gap-4">
                   <div className="text-sm text-gray-400">Seats ({totals.seatCount})</div>
                   <div className="text-sm text-gray-300 font-semibold">₹{totals.total.toLocaleString("en-IN")}</div>
                 </div>
 
-                {/* toggled details (seats list, price breakdown, QR). Hidden by default on small; shown when 'View details' clicked */}
                 <div
                   className={`mt-4 border-t border-red-900/40 pt-3 text-sm text-gray-300 space-y-3 transition-all duration-200 ease-in-out ${
                     isOpen ? "max-h-[1200px] opacity-100" : "max-h-0 opacity-0 overflow-hidden"
                   }`}
                   aria-hidden={!isOpen}
                 >
-                  {/* seats */}
                   <div>
                     <div className="text-sm text-gray-400">Seats ({totals.seatCount})</div>
                     <div className="mt-2 flex flex-wrap gap-2">
@@ -251,7 +245,7 @@ export default function BookingsPage() {
                     </div>
                   </div>
 
-                  {/* price breakdown */}
+        
                   <div className="space-y-2">
                     <div className="flex items-center justify-between text-gray-300">
                       <div>Seats subtotal</div>
@@ -264,7 +258,7 @@ export default function BookingsPage() {
                     </div>
                   </div>
 
-                  {/* QR */}
+ 
                   <div className="flex items-center gap-4">
                     <div className="flex items-center gap-2 text-sm text-gray-400">
                       <QrCode className="w-4 h-4" />
@@ -272,7 +266,7 @@ export default function BookingsPage() {
                     </div>
                     <div className="ml-auto">
                       {qrs[b.id] && qrs[b.id].url ? (
-                        // clickable QR image: clicking acts as "scan"
+                     
                         <img
                           src={qrs[b.id].url}
                           alt={`${b.title} qr`}
@@ -293,7 +287,7 @@ export default function BookingsPage() {
                   </div>
                 </div>
 
-                {/* actions */}
+        
                 <div className="mt-4 flex items-center gap-3">
                   <button
                     onClick={() => toggle(b.id)}
@@ -315,7 +309,7 @@ export default function BookingsPage() {
           })}
         </div>
       </div>
-      {/* Modal to show scanned booking details */}
+     
       {scannedDetails && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center p-4"
