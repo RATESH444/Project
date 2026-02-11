@@ -125,7 +125,6 @@ export default function BookingsPage() {
   
     const entry = qrs[bookingId];
     if (!entry || !entry.payload) {
-
       return;
     }
     try {
@@ -147,12 +146,14 @@ export default function BookingsPage() {
 
   return (
     <div
-      className="min-h-screen  bg-black p-6 sm:p-8 text-gray-100"
+      className="min-h-screen bg-black p-6 sm:p-8 text-gray-100"
       style={{ fontFamily: '"Cinzel", serif' }}
     >
       <div className="max-w-7xl pt-30 mx-auto">
         <header className="mb-6 flex items-center justify-between">
-          <h1 className="text-3xl md:text-4xl font-extrabold text-red-500">Your Tickets</h1>
+          <h1 className="text-3xl md:text-4xl font-extrabold text-cyan-400">
+            Your Tickets
+          </h1>
           <div className="text-sm text-gray-400">Present QR at entry</div>
         </header>
 
@@ -165,12 +166,12 @@ export default function BookingsPage() {
               <article
                 id={`booking-card-${b.id}`}
                 key={b.id}
-                className="bg-gradient-to-b from-gray-900 to-black rounded-2xl p-4 border border-red-800 shadow-xl"
+                className="bg-gradient-to-b from-gray-900 to-black rounded-2xl p-4 border border-cyan-800 shadow-xl"
                 aria-labelledby={`booking-${b.id}-title`}
               >
                
                 <div className="flex flex-col lg:flex-row items-start gap-4">
-                  <div className="w-full lg:w-24 h-44 lg:h-36 flex-shrink-0 overflow-hidden rounded-md border border-red-700">
+                  <div className="w-full lg:w-24 h-44 lg:h-36 flex-shrink-0 overflow-hidden rounded-md border border-cyan-700">
                     <img src={b.poster} alt={b.title} className="w-full h-full object-cover lg:object-cover xl:object-cover md:object-contain" />
                   </div>
 
@@ -179,7 +180,7 @@ export default function BookingsPage() {
                       <div>
                         <h2
                           id={`booking-${b.id}-title`}
-                          className="text-lg font-bold text-red-400 flex items-center gap-2"
+                          className="text-lg font-bold text-cyan-300 flex items-center gap-2"
                         >
                           <Film className="w-5 h-5" />
                           <span>{b.title}</span>
@@ -190,7 +191,6 @@ export default function BookingsPage() {
                         </div>
                       </div>
 
-                      
                       <div className="text-xs text-gray-400 text-right">
                         <div className="hidden lg:block">{b.category}</div>
                       </div>
@@ -198,12 +198,12 @@ export default function BookingsPage() {
 
                     <div className="mt-3 text-sm text-gray-300 flex flex-col sm:flex-row sm:items-center sm:gap-4">
                       <div className="flex items-center gap-2">
-                        <Clock className="w-4 h-4 text-red-300" />
+                        <Clock className="w-4 h-4 text-cyan-300" />
                         <div>{fmtTime(b.slotTime)}</div>
                       </div>
 
                       <div className="flex items-center gap-2 mt-2 sm:mt-0">
-                        <MapPin className="w-4 h-4 text-red-300" />
+                        <MapPin className="w-4 h-4 text-cyan-300" />
                         <div className="text-sm">{b.auditorium}</div>
                       </div>
                     </div>
@@ -219,10 +219,9 @@ export default function BookingsPage() {
                 </div>
 
                 <div
-                  className={`mt-4 border-t border-red-900/40 pt-3 text-sm text-gray-300 space-y-3 transition-all duration-200 ease-in-out ${
+                  className={`mt-4 border-t border-cyan-900/40 pt-3 text-sm text-gray-300 space-y-3 transition-all duration-200 ease-in-out ${
                     isOpen ? "max-h-[1200px] opacity-100" : "max-h-0 opacity-0 overflow-hidden"
                   }`}
-                  aria-hidden={!isOpen}
                 >
                   <div>
                     <div className="text-sm text-gray-400">Seats ({totals.seatCount})</div>
@@ -230,12 +229,14 @@ export default function BookingsPage() {
                       {b.seats.map((s) => (
                         <div
                           key={s.id}
-                          className="px-3 py-1 rounded-md bg-black/40 border border-red-800 flex items-center gap-2 text-sm"
+                          className="px-3 py-1 rounded-md bg-black/40 border border-cyan-800 flex items-center gap-2 text-sm"
                         >
                           <div className="font-semibold">{s.id}</div>
                           <div
                             className={`text-xs px-2 py-0.5 rounded ${
-                              s.type === "recliner" ? "bg-red-700 text-white" : "bg-gray-800 text-gray-200"
+                              s.type === "recliner"
+                                ? "bg-cyan-700 text-white"
+                                : "bg-gray-800 text-gray-200"
                             }`}
                           >
                             {s.type === "recliner" ? "Recliner" : "Standard"}
@@ -245,7 +246,6 @@ export default function BookingsPage() {
                     </div>
                   </div>
 
-        
                   <div className="space-y-2">
                     <div className="flex items-center justify-between text-gray-300">
                       <div>Seats subtotal</div>
@@ -258,7 +258,6 @@ export default function BookingsPage() {
                     </div>
                   </div>
 
- 
                   <div className="flex items-center gap-4">
                     <div className="flex items-center gap-2 text-sm text-gray-400">
                       <QrCode className="w-4 h-4" />
@@ -266,17 +265,11 @@ export default function BookingsPage() {
                     </div>
                     <div className="ml-auto">
                       {qrs[b.id] && qrs[b.id].url ? (
-                     
                         <img
                           src={qrs[b.id].url}
                           alt={`${b.title} qr`}
                           className="w-28 h-28 object-contain rounded-md bg-white p-1 cursor-pointer"
-                          role="button"
-                          tabIndex={0}
                           onClick={() => handleQrScan(b.id)}
-                          onKeyDown={(e) => {
-                            if (e.key === "Enter") handleQrScan(b.id);
-                          }}
                         />
                       ) : (
                         <div className="w-28 h-28 bg-gray-800 rounded-md flex items-center justify-center text-xs text-gray-500">
@@ -287,12 +280,10 @@ export default function BookingsPage() {
                   </div>
                 </div>
 
-        
                 <div className="mt-4 flex items-center gap-3">
                   <button
                     onClick={() => toggle(b.id)}
-                    aria-expanded={isOpen}
-                    className="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-red-700 bg-black/30 hover:bg-black/40 transition"
+                    className="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-cyan-700 bg-black/30 hover:bg-black/40 transition"
                   >
                     <span>{isOpen ? "Hide details" : "View details"}</span>
                     <ChevronDown
@@ -301,48 +292,34 @@ export default function BookingsPage() {
                       }`}
                     />
                   </button>
-
-                 
                 </div>
               </article>
             );
           })}
         </div>
       </div>
-     
+
       {scannedDetails && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4"
-          aria-modal="true"
-          role="dialog"
-        >
-          <div
-            className="absolute inset-0 bg-black/70"
-            onClick={closeModal}
-            aria-hidden="true"
-          />
-          <div className="relative max-w-md w-full bg-gray-900 rounded-2xl p-6 border border-red-800 shadow-2xl text-gray-100">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-black/70" onClick={closeModal} />
+          <div className="relative max-w-md w-full bg-gray-900 rounded-2xl p-6 border border-cyan-800 shadow-2xl text-gray-100">
             <div className="flex items-start justify-between gap-4">
               <div>
-                <h3 className="text-xl font-bold text-red-400">{scannedDetails.title}</h3>
-                <div className="text-sm text-gray-300">Booking ID: <span className="font-mono text-sm">{scannedDetails.bookingId}</span></div>
-                <div className="mt-2 text-sm text-gray-300">
-                  <div><strong>Time:</strong> {scannedDetails.time}</div>
-                  <div><strong>Auditorium:</strong> {scannedDetails.auditorium}</div>
-                  <div className="mt-2"><strong>Seats:</strong> {Array.isArray(scannedDetails.seats) ? scannedDetails.seats.join(", ") : scannedDetails.seats}</div>
+                <h3 className="text-xl font-bold text-cyan-300">
+                  {scannedDetails.title}
+                </h3>
+                <div className="text-sm text-gray-300">
+                  Booking ID: <span className="font-mono">{scannedDetails.bookingId}</span>
                 </div>
               </div>
 
               <button
                 onClick={closeModal}
-                className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-black/40 hover:bg-black/30 border border-gray-700"
-                aria-label="Close scanned details"
+                className="w-8 h-8 rounded-full bg-black/40 hover:bg-black/30 border border-gray-700 flex items-center justify-center"
               >
                 <X className="w-4 h-4" />
               </button>
             </div>
-
-           
           </div>
         </div>
       )}

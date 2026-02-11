@@ -98,7 +98,7 @@ const Navbar = () => {
 
   const navItems = [
     { id: "home", label: "Home", icon: Home, path: "/" },
-    { id: "movies", label: "Movies", icon: Film, path: "/movies" }, // <--- added Bookings
+    { id: "movies", label: "Movies", icon: Film, path: "/movies" }, 
     { id: "releases", label: "Releases", icon: Calendar, path: "/releases" },
     { id: "contact", label: "Contact", icon: Mail, path: "/contact" },
     { id: "bookings", label: "Bookings", icon: Ticket, path: "/bookings" },

@@ -39,7 +39,7 @@ const ContactPage = () => {
  
     const whatsappMessage = `Name: ${encodeURIComponent(formData.name)}%0AEmail: ${encodeURIComponent(formData.email)}%0APhone: ${encodeURIComponent(formData.phone)}%0ASubject: ${encodeURIComponent(formData.subject)}%0AMessage: ${encodeURIComponent(formData.message)}`;
 
-    window.open(`https://wa.me/8792390642?text=${whatsappMessage}`, '_blank');
+    window.open(`https://wa.me/7676009657?text=${whatsappMessage}`, '_blank');
   };
 
   return (
@@ -226,7 +226,7 @@ const ContactPage = () => {
                     </div>
                     <div>
                       <h3 className={contactStyles.contactText}>Booking Hotline</h3>
-                      <p className={contactStyles.contactDetail}>+91 8792390642</p>
+                      <p className={contactStyles.contactDetail}>+91  76760 09657</p>
                     </div>
                   </div>
                   
@@ -236,8 +236,8 @@ const ContactPage = () => {
                     </div>
                     <div>
                       <h3 className={contactStyles.contactText}>Email Address</h3>
-                      <p className={contactStyles.contactDetail}>dharshanmahale@gmail.com</p>
-                      <p className={contactStyles.contactDetail}>dharshanmahale@gmain.com</p>
+                      <p className={contactStyles.contactDetail}>ADMINN@gmail.com</p>
+                      <p className={contactStyles.contactDetail}>ADMINN@gmain.com</p>
                     </div>
                   </div>
                   
@@ -268,7 +268,7 @@ const ContactPage = () => {
                 </p>
                 <div className="flex items-center">
                   <div className={contactStyles.emergencyHotline}>
-                    HOTLINE: +91 76760 09657
+                    HOTLINE: +91 578743992
                   </div>
                   <span className={contactStyles.emergencyNote}>Available during showtimes</span>
                 </div>

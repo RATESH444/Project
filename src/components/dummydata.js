@@ -12,6 +12,8 @@ import RP10 from "../assets/RP10.png"
 
 
 
+
+
 const movies = [
   {
     id: 1,
