@@ -1,0 +1,39 @@
+{
+  "files": {
+    "main.css": "/Project/static/css/main.160633ab.css",
+    "main.js": "/Project/static/js/main.7b9aa080.js",
+    "static/media/RP10.png": "/Project/static/media/RP10.c5f8372e7553ccf33183.png",
+    "static/media/LT2.png": "/Project/static/media/LT2.517ff14d2e5fdf2a9b10.png",
+    "static/media/LT3.png": "/Project/static/media/LT3.2e31a21141728be3f69b.png",
+    "static/media/FM2.png": "/Project/static/media/FM2.1cdafc8e142b3a10810b.png",
+    "static/media/FM6.png": "/Project/static/media/FM6.63a52a9a852145181307.png",
+    "static/media/RP3.png": "/Project/static/media/RP3.1b53b0628fab2b43e5ea.png",
+    "static/media/FM3.png": "/Project/static/media/FM3.a57555eaa69d8d1ab08c.png",
+    "static/media/RP5.png": "/Project/static/media/RP5.60b3af377812cf1e5e1e.png",
+    "static/media/LT7.png": "/Project/static/media/LT7.880951a629f8e53385dd.png",
+    "static/media/LT4.png": "/Project/static/media/LT4.01a55bdea8cf75afa935.png",
+    "static/media/FM1.png": "/Project/static/media/FM1.a056b8634dbe1b183b48.png",
+    "static/media/LT1.png": "/Project/static/media/LT1.f7094dff43dbfe5ef48c.png",
+    "static/media/LT6.png": "/Project/static/media/LT6.968f3077809f354bbb83.png",
+    "static/media/FM5.png": "/Project/static/media/FM5.ca6ee4c573f4b8d8e2b1.png",
+    "static/media/LT8.png": "/Project/static/media/LT8.4b025b866328553bdb8e.png",
+    "static/media/LT5.png": "/Project/static/media/LT5.48869a9cbca95c13f716.png",
+    "static/media/netflix.jpg": "/Project/static/media/netflix.20af41faaebc503780f2.jpg",
+    "static/media/LT10.png": "/Project/static/media/LT10.fdf342418f491acbb5f8.png",
+    "static/media/LT9.png": "/Project/static/media/LT9.a1428cab637d70acd188.png",
+    "static/media/FM4.png": "/Project/static/media/FM4.f33a9570b6cee779327e.png",
+    "static/media/RP1.png": "/Project/static/media/RP1.a0691326ed81861bb975.png",
+    "static/media/RP4.png": "/Project/static/media/RP4.efafadd0a5cc1180e6d8.png",
+    "static/media/RP2.png": "/Project/static/media/RP2.cdf6aac15e781db8a686.png",
+    "static/media/RP9.png": "/Project/static/media/RP9.c53052b0cefc8da72f00.png",
+    "static/media/RP8.png": "/Project/static/media/RP8.ed4659b2a377df4fe7d7.png",
+    "static/media/RP7.png": "/Project/static/media/RP7.b27f70d4c34c68f33a84.png",
+    "index.html": "/Project/index.html",
+    "main.160633ab.css.map": "/Project/static/css/main.160633ab.css.map",
+    "main.7b9aa080.js.map": "/Project/static/js/main.7b9aa080.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.160633ab.css",
+    "static/js/main.7b9aa080.js"
+  ]
+}
