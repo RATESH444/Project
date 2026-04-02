@@ -66,34 +66,31 @@ const App = () => {
     };
   }, []);
 
-  return (
-    <>
-      <ScrollToTop />
+return (
+  <>
+    <ScrollToTop />
 
-      {/* Root wrapper prevents horizontal scroll from any child */}
-      <div className="min-h-screen w-full overflow-x-hidden">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/movies" element={<Movie />} />
-          <Route path="/releases" element={<Release />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/bookings" element={<Booking />} />
+    <div className="min-h-screen w-full overflow-x-hidden">
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/movies" element={<Movie />} />
+        <Route path="/releases" element={<Release />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/bookings" element={<Booking />} />
 
-          <Route path="/movie/:id" element={<MovieDetailPageHome />} />
+        <Route path="/movie/:id" element={<MovieDetailPageHome />} />
+        <Route path="/movie/:id/seat/:slot" element={<SeatSelectorPageHome />} />
+        <Route path="/movie/:id/seat-selector/:slot" element={<SeatSelectorPageHome />} />
 
-          <Route path="/movie/:id/seat/:slot" element={<SeatSelectorPageHome />} />
-          <Route path="/movie/:id/seat-selector/:slot" element={<SeatSelectorPageHome />} />
+        <Route path="/movies/:id" element={<MovieDetailPage />} />
+        <Route path="/movies/:id/seat/:slot" element={<SeatSelectorPage />} />
+        <Route path="/movies/:id/seat-selector/:slot" element={<SeatSelectorPage />} />
 
-          <Route path="/movies/:id" element={<MovieDetailPage />} />
-
-          <Route path="/movies/:id/seat/:slot" element={<SeatSelectorPage />} />
-          <Route path="/movies/:id/seat-selector/:slot" element={<SeatSelectorPage />} />
-        </Routes>
-      </div>
-    </>
-  );
-};
-
+        <Route path="*" element={<Home />} />
+      </Routes>
+    </div>
+  </>
+)}
 export default App;

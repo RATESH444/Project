@@ -386,6 +386,16 @@ export const moviesPageStyles = {
       "bg-gray-800 text-gray-300 hover:bg-gray-700"
   },
 
+  // ✅ SEARCH BAR (NEW)
+  searchContainer: "flex justify-center mb-8 px-4",
+  searchWrapper: "relative w-full max-w-md",
+  searchInput:
+    "w-full px-5 py-3 pl-12 rounded-full bg-gray-800 text-white border border-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all duration-300",
+  searchIcon:
+    "absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400",
+  searchClear:
+    "absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white cursor-pointer",
+
   // Movies grid section
   moviesSection: "py-8 px-4 pb-20",
   moviesContainer: "container mx-auto",
@@ -413,7 +423,6 @@ export const moviesPageStyles = {
   showMoreButton:
     "px-6 py-3 cursor-pointer rounded-full text-white border border-white/10 bg-gradient-to-b from-cyan-500 to-blue-600 transition hover:from-cyan-600 hover:to-blue-700"
 };
-
 
 // Add to src/assets/dummyStyles.js
 export const footerStyles = {

@@ -6,15 +6,31 @@ import MOVIES from './dummydata'; // adjust path if needed
 const MoviesPage = () => {
   const [activeCategory, setActiveCategory] = useState('all');
   const [showAll, setShowAll] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+
   const movies = MOVIES;
-  const filteredMovies = activeCategory === 'all'
-    ? movies
-    : movies.filter(movie => movie.category === activeCategory);
+
+  // ✅ FILTER (category + search)
+  const filteredMovies = movies.filter(movie => {
+    const matchesCategory =
+      activeCategory === 'all' || movie.category === activeCategory;
+
+    const matchesSearch =
+      movie.title.toLowerCase().includes(searchTerm.toLowerCase());
+
+    return matchesCategory && matchesSearch;
+  });
+
   const COLLAPSE_COUNT = 12;
 
-  useEffect(() => { setShowAll(false); }, [activeCategory]);
+  // ✅ reset show more
+  useEffect(() => {
+    setShowAll(false);
+  }, [activeCategory, searchTerm]);
 
-  const visibleMovies = showAll ? filteredMovies : filteredMovies.slice(0, COLLAPSE_COUNT);
+  const visibleMovies = showAll
+    ? filteredMovies
+    : filteredMovies.slice(0, COLLAPSE_COUNT);
 
   const categories = [
     { id: 'all', name: 'All Movies' },
@@ -26,6 +42,8 @@ const MoviesPage = () => {
 
   return (
     <div className={moviesPageStyles.container}>
+      
+      {/* CATEGORY SECTION */}
       <section className={moviesPageStyles.categoriesSection}>
         <div className={moviesPageStyles.categoriesContainer}>
           <div className={moviesPageStyles.categoriesFlex}>
@@ -46,11 +64,39 @@ const MoviesPage = () => {
         </div>
       </section>
 
+      {/* MOVIES SECTION */}
       <section className={moviesPageStyles.moviesSection}>
         <div className={moviesPageStyles.moviesContainer}>
+
+          {/* ✅ NEW STYLED SEARCH BAR */}
+          <div className={moviesPageStyles.searchContainer}>
+            <div className={moviesPageStyles.searchWrapper}>
+              
+              <input
+                type="text"
+                placeholder="Search movies..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className={moviesPageStyles.searchInput}
+              />
+
+              <span className={moviesPageStyles.searchIcon}>🔍</span>
+
+              {searchTerm && (
+                <span
+                  onClick={() => setSearchTerm('')}
+                  className={moviesPageStyles.searchClear}
+                >
+                  ✕
+                </span>
+              )}
+
+            </div>
+          </div>
+
+          {/* MOVIES GRID */}
           <div className={moviesPageStyles.moviesGrid}>
             {visibleMovies.map(movie => (
-              // Link sends user to /movies/:id and also passes the movie object via state
               <Link
                 key={movie.id}
                 to={`/movies/${movie.id}`}
@@ -67,21 +113,27 @@ const MoviesPage = () => {
                 </div>
 
                 <div className={moviesPageStyles.movieInfo}>
-                  <h3 className={moviesPageStyles.movieTitle}>{movie.title}</h3>
+                  <h3 className={moviesPageStyles.movieTitle}>
+                    {movie.title}
+                  </h3>
                   <div className={moviesPageStyles.movieCategory}>
-                    <span className={moviesPageStyles.movieCategoryText}>{movie.category}</span>
+                    <span className={moviesPageStyles.movieCategoryText}>
+                      {movie.category}
+                    </span>
                   </div>
                 </div>
               </Link>
             ))}
 
+            {/* EMPTY STATE */}
             {filteredMovies.length === 0 && (
               <div className={moviesPageStyles.emptyState}>
-                No movies found in this category.
+                No movies found.
               </div>
             )}
           </div>
 
+          {/* SHOW MORE / LESS */}
           {filteredMovies.length > COLLAPSE_COUNT && (
             <div className={moviesPageStyles.showMoreContainer}>
               <button
@@ -89,7 +141,9 @@ const MoviesPage = () => {
                 className={moviesPageStyles.showMoreButton}
                 aria-expanded={showAll}
               >
-                {showAll ? 'Show less' : `Show more (${filteredMovies.length - COLLAPSE_COUNT} more)`}
+                {showAll
+                  ? 'Show less'
+                  : `Show more (${filteredMovies.length - COLLAPSE_COUNT} more)`}
               </button>
             </div>
           )}

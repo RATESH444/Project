@@ -182,6 +182,14 @@ export default function MovieDetailPage() {
     setSelectedMovie(null);
   };
 
+    const firstShowtime = useMemo(() => {
+    if (!showtimeDays.length) return null;
+    for (const day of showtimeDays) {
+      if (day.showtimes && day.showtimes.length) return day.showtimes[0].datetime;
+    }
+    return null;
+  }, [showtimeDays]);
+
   if (!movie) {
     return (
       <div className={movieDetailHStyles.notFoundContainer}>
@@ -245,13 +253,7 @@ export default function MovieDetailPage() {
     }
   };
 
-  const firstShowtime = useMemo(() => {
-    if (!showtimeDays.length) return null;
-    for (const day of showtimeDays) {
-      if (day.showtimes && day.showtimes.length) return day.showtimes[0].datetime;
-    }
-    return null;
-  }, [showtimeDays]);
+
 
   return (
     <div className={movieDetailHStyles.pageContainer}>
